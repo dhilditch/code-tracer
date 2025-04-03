@@ -1,0 +1,34 @@
+{
+  "name": "codetracer",
+  "version": "0.1.0",
+  "description": "CodeTracer - Track code relationships with @usedby annotations",
+  "private": true,
+  "workspaces": [
+    "core",
+    "cli",
+    "extension"
+  ],
+  "scripts": {
+    "build": "npm run build:core && npm run build:cli && npm run build:ext",
+    "build:core": "cd core && npm run build",
+    "build:cli": "cd cli && npm run build",
+    "build:ext": "cd extension && npm run build",
+    "test": "npm run test:core && npm run test:cli && npm run test:ext",
+    "test:core": "cd core && npm test",
+    "test:cli": "cd cli && npm test",
+    "test:ext": "cd extension && npm test",
+    "clean": "rm -rf core/dist cli/dist extension/out",
+    "package:ext": "cd extension && vsce package"
+  },
+  "keywords": [
+    "documentation",
+    "code-analysis",
+    "vscode-extension",
+    "code-relationships"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vsce": "^2.15.0"
+  }
+}
