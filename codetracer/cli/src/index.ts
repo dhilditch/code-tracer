@@ -3,7 +3,7 @@
 import { Command } from 'commander';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import { scanCommand } from './commands/scan';
 import { annotateCommand } from './commands/annotate';
 import { visualizeCommand } from './commands/visualize';
