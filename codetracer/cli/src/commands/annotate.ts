@@ -2,7 +2,7 @@ import { Command } from 'commander';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chalk from 'chalk';
-import * as ora from 'ora';
+import ora from 'ora';
 import * as inquirer from 'inquirer';
 import { Annotator, Scanner, Symbol } from 'codetracer-core';
 import { createParsers } from '../parsers';

@@ -2,7 +2,7 @@ import { Command } from 'commander';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chalk from 'chalk';
-import * as ora from 'ora';
+import ora from 'ora';
 import * as inquirer from 'inquirer';
 import { RelationshipGraph, Symbol } from 'codetracer-core';
 
@@ -118,7 +118,7 @@ export function visualizeCommand(program: Command): void {
         const graph = new RelationshipGraph();
         
         // Parse options
-        const maxNodes = parseInt(options.maxNodes || '50');
+        const maxNodes = parseInt(String(options.maxNodes || '50'));
         
         let result;
         if (targetSymbol) {

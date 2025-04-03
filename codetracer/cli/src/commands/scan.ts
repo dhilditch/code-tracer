@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as glob from 'glob';
 import * as chalk from 'chalk';
-import * as ora from 'ora';
+import ora from 'ora';
 import { Scanner, LanguageParser } from 'codetracer-core';
 import { createParsers } from '../parsers';
 
@@ -37,7 +37,7 @@ export function scanCommand(program: Command): void {
         // Register parsers
         const parsers = createParsers();
         for (const [ext, parser] of Object.entries(parsers)) {
-          scanner.registerParser(ext, parser);
+          scanner.registerParser(ext, parser as LanguageParser);
         }
         
         // Resolve path
@@ -74,7 +74,7 @@ export function scanCommand(program: Command): void {
         filePaths = [...new Set(filePaths)];
         
         // Limit the number of files if needed
-        const maxFiles = parseInt(options.maxFiles as string) || 1000;
+        const maxFiles = parseInt(String(options.maxFiles)) || 1000;
         if (filePaths.length > maxFiles) {
           spinner.info(`Limiting scan to ${maxFiles} files (out of ${filePaths.length} found)`);
           filePaths = filePaths.slice(0, maxFiles);
