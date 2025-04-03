@@ -88,6 +88,17 @@ export class Annotator {
             
             for (const usage of symbol.usages) {
                 const filePath = usage.filePath;
+                
+                // Skip self-references (usages in the same file)
+                if (filePath === symbol.filePath) {
+                    continue;
+                }
+                
+                // Skip entry point files like *.php in the root (main plugin file)
+                if (this.isEntryPointFile(filePath) || this.isEntryPointFile(symbol.filePath)) {
+                    continue;
+                }
+                
                 if (!usagesByFile.has(filePath)) {
                     usagesByFile.set(filePath, []);
                 }
@@ -107,14 +118,42 @@ export class Annotator {
                 annotations.push(`${relativePath}:${lineNumbers} (${usages[0].type})`);
             }
         } else {
-            // Create annotations for each usage individually
+            // Create annotations for each usage individually, skipping self-references
             symbol.usages.forEach(usage => {
+                // Skip self-references and entry points
+                if (usage.filePath === symbol.filePath ||
+                    this.isEntryPointFile(usage.filePath) ||
+                    this.isEntryPointFile(symbol.filePath)) {
+                    return;
+                }
+                
                 const relativePath = this.getRelativePath(usage.filePath, symbol.filePath);
                 annotations.push(`${relativePath}:${usage.position.line + 1} (${usage.type})`);
             });
         }
         
         return annotations;
+    }
+    
+    /**
+     * Check if a file is an entry point (main plugin file)
+     */
+    private isEntryPointFile(filePath: string): boolean {
+        // Check if it's a PHP file in the root directory (common for WordPress plugins)
+        const fileName = path.basename(filePath);
+        const dirName = path.basename(path.dirname(filePath));
+        
+        // Files named like the plugin directory are likely entry points
+        // For example: super-speedy-compare.php in super-speedy-compare directory
+        const parentDirName = path.basename(path.dirname(path.dirname(filePath)));
+        const fileNameNoExt = fileName.replace(/\.php$/, '');
+        const isNamedLikeDir = parentDirName.includes(fileNameNoExt) ||
+                              dirName.includes(fileNameNoExt) ||
+                              fileNameNoExt.includes(dirName);
+        
+        // If it's a PHP file directly in the plugin root folder or named like the directory
+        return fileName.endsWith('.php') &&
+              (dirName === parentDirName || isNamedLikeDir);
     }
     
     /**
@@ -190,29 +229,81 @@ export class Annotator {
      * Update an existing doc block with @usedby annotations
      */
     updateDocBlock(
-        existingDocBlock: string, 
-        usageAnnotations: string[], 
+        existingDocBlock: string,
+        usageAnnotations: string[],
         commentStyle: CommentStyle,
         options: AnnotationOptions = {}
     ): string {
+        // If no usages to add, just return the existing block
+        if (!usageAnnotations || usageAnnotations.length === 0) {
+            return existingDocBlock;
+        }
+        
         const lines = existingDocBlock.split('\n');
         const resultLines: string[] = [];
-        let usedbyTagFound = false;
+        
+        // Track existing @usedby entries to prevent duplicates
+        let existingUsedByEntries: string[] = [];
+        let usedbyTagSection = false;
         let mermaidFound = false;
+        let addedNewEntries = false;
+        
+        // Find all existing @usedby entries
+        for (const line of lines) {
+            const match = line.trim().match(/@usedby\s+(.*)/);
+            if (match && match[1]) {
+                existingUsedByEntries.push(match[1].trim());
+            }
+        }
         
         // Process the doc block line by line
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i];
+            const trimmedLine = line.trim();
             
-            // Skip existing @usedby annotations if we're updating
-            if (options.updateExisting !== false && line.trim().match(/@usedby\s/)) {
-                usedbyTagFound = true;
+            // Detect @usedby tag section
+            if (trimmedLine.match(/@usedby\s/)) {
+                usedbyTagSection = true;
+                
+                // Add this line, we'll handle duplicates
+                resultLines.push(line);
                 continue;
             }
             
+            // End of @usedby section when we hit another @ tag or blank line after @usedby
+            if (usedbyTagSection &&
+                (trimmedLine.startsWith('@') ||
+                (trimmedLine === '' && lines[i-1].trim().match(/@usedby\s/)))) {
+                usedbyTagSection = false;
+                
+                // Add new entries if not already added
+                if (!addedNewEntries) {
+                    const indentation = line.match(/^\s*/)?.[0] || '';
+                    
+                    // Add each new annotation that doesn't already exist
+                    for (const annotation of usageAnnotations) {
+                        // More precise duplicate detection
+                        if (!existingUsedByEntries.some(entry => {
+                            // Extract the file path part from the entry
+                            const entryPathMatch = entry.match(/^([^:]+):/);
+                            const annotationPathMatch = annotation.match(/^([^:]+):/);
+                            
+                            if (entryPathMatch && annotationPathMatch) {
+                                // Compare file paths only, ignoring line numbers
+                                return entryPathMatch[1].trim() === annotationPathMatch[1].trim();
+                            }
+                            return entry.includes(annotation);
+                        })) {
+                            resultLines.push(`${indentation}${commentStyle.linePrefix} @usedby ${annotation}`);
+                            addedNewEntries = true;
+                        }
+                    }
+                }
+            }
+            
             // Skip existing Mermaid diagram if we're updating
-            if (options.updateExisting !== false && 
-                options.includeMermaid && 
+            if (options.updateExisting !== false &&
+                options.includeMermaid &&
                 line.includes('```mermaid')) {
                 mermaidFound = true;
                 // Skip until the end of the Mermaid block
@@ -226,16 +317,38 @@ export class Annotator {
             }
             
             // If we find the end of the block and haven't added new @usedby tags yet
-            if (line.trim().endsWith(commentStyle.blockEnd) && !usedbyTagFound) {
+            if (trimmedLine.endsWith(commentStyle.blockEnd) && !addedNewEntries) {
                 // Add the new @usedby annotations before the closing tag
+                const indentation = line.match(/^\s*/)?.[0] || '';
+                
+                // Add a blank line before the usedby section if there's content
+                if (resultLines.length > 1 &&
+                    !resultLines[resultLines.length-1].trim().match(/@/) &&
+                    !resultLines[resultLines.length-1].trim().match(/^\s*$/)) {
+                    resultLines.push(`${indentation}${commentStyle.linePrefix}`);
+                }
+                
+                // Add each new annotation that doesn't already exist
                 for (const annotation of usageAnnotations) {
-                    const indentation = line.match(/^\s*/)?.[0] || '';
-                    resultLines.push(`${indentation}${commentStyle.linePrefix} @usedby ${annotation}`);
+                    // More precise duplicate detection
+                    if (!existingUsedByEntries.some(entry => {
+                        // Extract the file path part from the entry
+                        const entryPathMatch = entry.match(/^([^:]+):/);
+                        const annotationPathMatch = annotation.match(/^([^:]+):/);
+                        
+                        if (entryPathMatch && annotationPathMatch) {
+                            // Compare file paths only, ignoring line numbers
+                            return entryPathMatch[1].trim() === annotationPathMatch[1].trim();
+                        }
+                        return entry.includes(annotation);
+                    })) {
+                        resultLines.push(`${indentation}${commentStyle.linePrefix} @usedby ${annotation}`);
+                        addedNewEntries = true;
+                    }
                 }
                 
                 // Add Mermaid diagram if requested and not already present
-                if (options.includeMermaid && !mermaidFound && usageAnnotations.length > 0) {
-                    const indentation = line.match(/^\s*/)?.[0] || '';
+                if (options.includeMermaid && !mermaidFound && addedNewEntries) {
                     resultLines.push(`${indentation}${commentStyle.linePrefix}`);
                     resultLines.push(`${indentation}${commentStyle.linePrefix} Usage diagram:`);
                     resultLines.push(`${indentation}${commentStyle.linePrefix} \`\`\`mermaid`);
@@ -253,16 +366,6 @@ export class Annotator {
             } else {
                 resultLines.push(line);
             }
-        }
-        
-        // If we haven't added the @usedby tags yet (no end block found for some reason)
-        if (!usedbyTagFound && !resultLines.some(line => line.trim().match(/@usedby\s/))) {
-            const lastLine = resultLines.pop() || '';
-            for (const annotation of usageAnnotations) {
-                const indentation = lastLine.match(/^\s*/)?.[0] || '';
-                resultLines.push(`${indentation}${commentStyle.linePrefix} @usedby ${annotation}`);
-            }
-            resultLines.push(lastLine);
         }
         
         return resultLines.join('\n');

@@ -1,11 +1,21 @@
 import { LanguageParser, Symbol, Usage } from 'codetracer-core';
 import * as path from 'path';
+import * as fs from 'fs';
 
 // This file creates and configures parsers for different file types
 class PhpParserImpl extends LanguageParser {
+  // Keywords that should not be treated as functions
+  private reservedKeywords = [
+    'require', 'require_once', 'include', 'include_once', 'echo', 'print', 'return',
+    'if', 'for', 'foreach', 'while', 'switch', 'case', 'break', 'continue', 'default'
+  ];
+
   parseSymbols(content: string, filePath: string): Symbol[] {
     const symbols: Symbol[] = [];
     const fileName = path.basename(filePath);
+    
+    // Check for file requirements (require_once, include, etc.)
+    this.findRequirements(content, filePath, symbols);
     
     // Find PHP classes
     const classRegex = /class\s+(\w+)(?:\s+extends\s+(\w+))?(?:\s+implements\s+([\w,\s]+))?/g;
@@ -79,6 +89,79 @@ class PhpParserImpl extends LanguageParser {
     
     return symbols;
   }
+  /**
+   * Find file requirements (require_once, include, etc.) and create annotations
+   * This method creates symbols representing inclusion relationships
+   */
+  private findRequirements(content: string, filePath: string, symbols: Symbol[]): void {
+    // Regex to match require/include statements
+    const requireRegex = /(require|require_once|include|include_once)\s*\(\s*(?:['"])([^'"]+)(?:['"])\s*\)/g;
+    let requireMatch;
+    
+    while ((requireMatch = requireRegex.exec(content)) !== null) {
+      const requireType = requireMatch[1]; // require, require_once, etc.
+      const requiredFile = requireMatch[2]; // The file path
+      const position = this.getPositionFromOffset(content, requireMatch.index);
+      
+      // Try to resolve the file path relative to the current file
+      const dirName = path.dirname(filePath);
+      let resolvedPath = '';
+      
+      if (requiredFile.startsWith('./') || requiredFile.startsWith('../')) {
+        // Relative path
+        resolvedPath = path.resolve(dirName, requiredFile);
+      } else if (requiredFile.startsWith('/')) {
+        // Absolute path
+        resolvedPath = requiredFile;
+      } else {
+        // Assume it's relative to current file
+        resolvedPath = path.resolve(dirName, requiredFile);
+      }
+      
+      // Check if the file exists
+      if (fs.existsSync(resolvedPath)) {
+        const currentFileName = path.basename(filePath);
+        const includedFileName = path.basename(resolvedPath);
+        
+        // Create a usage entry for the current file - this file uses the included file
+        const usage: Usage = {
+          // The usage is in the current file
+          filePath: filePath,
+          position: position,
+          range: {
+            start: position,
+            end: {
+              line: position.line,
+              character: position.character + requireMatch[0].length
+            }
+          },
+          context: this.extractContext(content, requireMatch.index),
+          type: 'reference'
+        };
+        
+        // Create a virtual symbol for the included file
+        // This correctly establishes that the including file uses the included file
+        const symbolName = path.basename(filePath, '.php');
+        const includedFileSymbolName = includedFileName.replace(/\.php$/, '');
+        const symbol: Symbol = {
+          id: `${resolvedPath}#included_by_${symbolName}`,
+          name: includedFileSymbolName,
+          type: 'class', // Use 'class' as it's a valid type
+          // The symbol belongs to the included file, not the current file
+          filePath: resolvedPath,
+          position: { line: 0, character: 0 },
+          range: {
+            start: { line: 0, character: 0 },
+            end: { line: 0, character: 0 }
+          },
+          // The current file is using the included file
+          usages: [usage]
+        };
+        
+        symbols.push(symbol);
+      }
+    }
+  }
 
   findUsages(content: string, filePath: string, symbol: Symbol): Usage[] {
     const usages: Usage[] = [];
@@ -111,6 +194,59 @@ class PhpParserImpl extends LanguageParser {
       };
       
       usages.push(usage);
+    }
+    
+    // WordPress hooks detection
+    if (symbol.type === 'function') {
+      // Look for add_action and add_filter with this function name as a callback
+      const hookRegex = new RegExp(`(add_action|add_filter)\\(\\s*['"]([^'"]+)['"]\\s*,\\s*['"]${symbol.name}['"]`, 'g');
+      let hookMatch;
+      
+      while ((hookMatch = hookRegex.exec(content)) !== null) {
+        const hookType = hookMatch[1]; // add_action or add_filter
+        const hookName = hookMatch[2]; // The hook name
+        
+        const usagePosition = this.getPositionFromOffset(content, hookMatch.index);
+        const usageEndPosition = this.getPositionFromOffset(content, hookMatch.index + hookMatch[0].length);
+        
+        const usage: Usage = {
+          filePath,
+          position: usagePosition,
+          range: {
+            start: usagePosition,
+            end: usageEndPosition
+          },
+          context: this.extractContext(content, hookMatch.index),
+          type: 'call'
+        };
+        
+        usages.push(usage);
+      }
+      
+      // Look for array callbacks: add_action('hook', array($this, 'function_name'))
+      const arrayCallbackRegex = new RegExp(`(add_action|add_filter)\\(\\s*['"]([^'"]+)['"]\\s*,\\s*array\\(\\s*\\$[^,]+\\s*,\\s*['"]${symbol.name}['"]\\s*\\)`, 'g');
+      let arrayCallbackMatch;
+      
+      while ((arrayCallbackMatch = arrayCallbackRegex.exec(content)) !== null) {
+        const hookType = arrayCallbackMatch[1]; // add_action or add_filter
+        const hookName = arrayCallbackMatch[2]; // The hook name
+        
+        const usagePosition = this.getPositionFromOffset(content, arrayCallbackMatch.index);
+        const usageEndPosition = this.getPositionFromOffset(content, arrayCallbackMatch.index + arrayCallbackMatch[0].length);
+        
+        const usage: Usage = {
+          filePath,
+          position: usagePosition,
+          range: {
+            start: usagePosition,
+            end: usageEndPosition
+          },
+          context: this.extractContext(content, arrayCallbackMatch.index),
+          type: 'call'
+        };
+        
+        usages.push(usage);
+      }
     }
     
     return usages;
@@ -346,9 +482,81 @@ class CssParserImpl extends LanguageParser {
   }
 
   findUsages(content: string, filePath: string, symbol: Symbol): Usage[] {
-    // For CSS, we would look for class/id references in HTML files
-    // This is a simplified implementation since we don't have HTML parsing here
-    return [];
+    const usages: Usage[] = [];
+    
+    // Only process if this is a selector
+    if (symbol.type === 'selector') {
+      // Escape special characters in the selector
+      const escapedSelector = symbol.name.replace(/[.#]/g, '\\$&');
+      
+      // Find querySelector/querySelectorAll with this selector
+      const querySelectorRegex = new RegExp(`(document|element|\\w+)\\.(querySelector(?:All)?)\\(['"]${escapedSelector}['"]\\)`, 'g');
+      let querySelectorMatch;
+      
+      while ((querySelectorMatch = querySelectorRegex.exec(content)) !== null) {
+        const usagePosition = this.getPositionFromOffset(content, querySelectorMatch.index);
+        const usageEndPosition = this.getPositionFromOffset(content, querySelectorMatch.index + querySelectorMatch[0].length);
+        
+        const usage: Usage = {
+          filePath,
+          position: usagePosition,
+          range: {
+            start: usagePosition,
+            end: usageEndPosition
+          },
+          context: this.extractContext(content, querySelectorMatch.index),
+          type: 'reference'
+        };
+        
+        usages.push(usage);
+      }
+      
+      // Find jQuery style selectors
+      const jQueryRegex = new RegExp(`\\$\\(['"]${escapedSelector}['"]\\)`, 'g');
+      let jQueryMatch;
+      
+      while ((jQueryMatch = jQueryRegex.exec(content)) !== null) {
+        const usagePosition = this.getPositionFromOffset(content, jQueryMatch.index);
+        const usageEndPosition = this.getPositionFromOffset(content, jQueryMatch.index + jQueryMatch[0].length);
+        
+        const usage: Usage = {
+          filePath,
+          position: usagePosition,
+          range: {
+            start: usagePosition,
+            end: usageEndPosition
+          },
+          context: this.extractContext(content, jQueryMatch.index),
+          type: 'reference'
+        };
+        
+        usages.push(usage);
+      }
+      
+      // Find addEventListener with event delegation
+      const addEventRegex = new RegExp(`addEventListener\\(['"]\\w+['"].*${escapedSelector}`, 'g');
+      let addEventMatch;
+      
+      while ((addEventMatch = addEventRegex.exec(content)) !== null) {
+        const usagePosition = this.getPositionFromOffset(content, addEventMatch.index);
+        const usageEndPosition = this.getPositionFromOffset(content, addEventMatch.index + addEventMatch[0].length);
+        
+        const usage: Usage = {
+          filePath,
+          position: usagePosition,
+          range: {
+            start: usagePosition,
+            end: usageEndPosition
+          },
+          context: this.extractContext(content, addEventMatch.index),
+          type: 'reference'
+        };
+        
+        usages.push(usage);
+      }
+    }
+    
+    return usages;
   }
 }
 
