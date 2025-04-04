@@ -7,6 +7,7 @@ import chalk from 'chalk';
 import { scanCommand } from './commands/scan';
 import { annotateCommand } from './commands/annotate';
 import { visualizeCommand } from './commands/visualize';
+import { cleanCommand } from './commands/clean';
 
 // Create CLI program
 const program = new Command();
@@ -24,6 +25,7 @@ program
 scanCommand(program);
 annotateCommand(program);
 visualizeCommand(program);
+cleanCommand(program);
 
 // Add global options
 program
