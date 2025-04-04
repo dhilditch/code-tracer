@@ -1,6 +1,8 @@
 <?php
 /**
  * The main plugin class
+ *
+ * @usedby ../super-speedy-compare.php:25, 42, 50 (reference)
  */
 class Super_Speedy_Compare {
 

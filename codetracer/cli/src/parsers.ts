@@ -120,45 +120,95 @@ class PhpParserImpl extends LanguageParser {
       
       // Check if the file exists
       if (fs.existsSync(resolvedPath)) {
+        // ---- IMPORTANT FIXES ----
+        
+        // Fix 1: Skip if this would be a self-reference (file including itself)
+        if (path.normalize(resolvedPath) === path.normalize(filePath)) {
+          continue;
+        }
+        
+        // Fix 2: Convert file paths to relative format to avoid adding same paths with different formats
+        const relativeFilePath = path.relative(process.cwd(), filePath);
+        const relativeResolvedPath = path.relative(process.cwd(), resolvedPath);
+        
         const currentFileName = path.basename(filePath);
         const includedFileName = path.basename(resolvedPath);
         
-        // Create a usage entry for the current file - this file uses the included file
-        const usage: Usage = {
-          // The usage is in the current file
-          filePath: filePath,
-          position: position,
-          range: {
-            start: position,
-            end: {
-              line: position.line,
-              character: position.character + requireMatch[0].length
-            }
-          },
-          context: this.extractContext(content, requireMatch.index),
-          type: 'reference'
-        };
+        // Fix 3: Check if the paths might be referring to the same file with different paths
+        // This handles the case of files within the same directory but with different paths
+        const fileNameNoExt = path.basename(filePath, path.extname(filePath));
+        const resolvedNameNoExt = path.basename(resolvedPath, path.extname(resolvedPath));
         
-        // Create a virtual symbol for the included file
-        // This correctly establishes that the including file uses the included file
-        const symbolName = path.basename(filePath, '.php');
-        const includedFileSymbolName = includedFileName.replace(/\.php$/, '');
-        const symbol: Symbol = {
-          id: `${resolvedPath}#included_by_${symbolName}`,
-          name: includedFileSymbolName,
-          type: 'class', // Use 'class' as it's a valid type
-          // The symbol belongs to the included file, not the current file
-          filePath: resolvedPath,
-          position: { line: 0, character: 0 },
-          range: {
-            start: { line: 0, character: 0 },
-            end: { line: 0, character: 0 }
-          },
-          // The current file is using the included file
-          usages: [usage]
-        };
+        if (resolvedNameNoExt.includes(fileNameNoExt) || fileNameNoExt.includes(resolvedNameNoExt) ||
+            (relativeFilePath.includes(includedFileName) && relativeResolvedPath.includes(includedFileName))) {
+          continue;
+        }
         
-        symbols.push(symbol);
+        // Check if either file is an entry point - we need to handle require statements differently
+        let isRequiredFileEntryPoint = false;
+        let isCurrentFileEntryPoint = false;
+        
+        try {
+          const includedFileContent = fs.readFileSync(resolvedPath, 'utf8');
+          isRequiredFileEntryPoint = includedFileContent.includes('Plugin Name:') ||
+                         includedFileContent.includes('Theme Name:');
+                         
+          const currentFileContent = fs.readFileSync(filePath, 'utf8');
+          isCurrentFileEntryPoint = currentFileContent.includes('Plugin Name:') ||
+                         currentFileContent.includes('Theme Name:');
+        } catch (err) {
+          // If we can't read the file, assume it's not an entry point
+        }
+        
+        // Skip if the required file is an entry point - we don't want to annotate entry points
+        if (isRequiredFileEntryPoint) {
+          continue;
+        }
+        
+        // Check if we would be creating a duplicate entry for same require
+        const isDuplicate = symbols.some(s =>
+          s.filePath === resolvedPath &&
+          s.name === includedFileName.replace(/\.php$/, '') &&
+          s.usages &&
+          s.usages.some(u => u.filePath === filePath &&
+            u.position.line === position.line)
+        );
+
+        if (!isDuplicate) {
+          // Create a usage entry showing THIS file is using the INCLUDED file
+          const usage: Usage = {
+            filePath: filePath,
+            position: position,
+            range: {
+              start: position,
+              end: {
+                line: position.line,
+                character: position.character + requireMatch[0].length
+              }
+            },
+            context: this.extractContext(content, requireMatch.index),
+            type: 'reference'
+          };
+          
+          // Create a virtual symbol for the included file
+          const includedFileSymbolName = includedFileName.replace(/\.php$/, '');
+          const symbol: Symbol = {
+            id: `${resolvedPath}#file_ref_${Date.now()}`, // Unique ID
+            name: includedFileSymbolName,
+            type: 'class', // Use 'class' as it's a valid type
+            // The symbol belongs to the INCLUDED file
+            filePath: resolvedPath,
+            position: { line: 0, character: 0 },
+            range: {
+              start: { line: 0, character: 0 },
+              end: { line: 0, character: 0 }
+            },
+            // The current file is using the included file
+            usages: [usage]
+          };
+          
+          symbols.push(symbol);
+        }
       }
     }
   }
@@ -560,9 +610,7 @@ class CssParserImpl extends LanguageParser {
   }
 }
 
-/**
- * Create parsers for different file types
- */
+// Create and configure language parsers
 export function createParsers() {
   return {
     '.php': new PhpParserImpl(),
@@ -572,6 +620,6 @@ export function createParsers() {
     '.tsx': new JsParserImpl(),
     '.css': new CssParserImpl(),
     '.scss': new CssParserImpl(),
-    '.less': new CssParserImpl(),
+    '.less': new CssParserImpl()
   };
 }

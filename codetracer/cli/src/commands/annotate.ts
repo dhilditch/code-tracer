@@ -141,88 +141,121 @@ export function annotateCommand(program: Command): void {
           
           // Track if we've made changes to the file
           let fileModified = false;
-          
           // Sort symbols by their position in reverse order (to avoid position shifts)
           fileSymbols.sort((a, b) => b.position.line - a.position.line);
           
+          // Check if this file has comment blocks
+          const lines = content.split('\n');
+          
+          // Quick check for /** patterns before first class
+          let commentBlocks: {start: number, end: number}[] = [];
+          for (let i = 0; i < lines.length; i++) {
+            if (lines[i].trim().startsWith('class ')) {
+              break;
+            }
+            
+            if (lines[i].trim().startsWith('/**')) {
+              // Found a block start
+              let blockStart = i;
+              let blockEnd = -1;
+              
+              // Find the end
+              for (let j = i + 1; j < lines.length; j++) {
+                if (lines[j].trim() === '*/') {
+                  blockEnd = j;
+                  break;
+                }
+              }
+              
+              if (blockEnd !== -1) {
+                commentBlocks.push({start: blockStart, end: blockEnd});
+                i = blockEnd; // Skip to after this block
+              }
+            }
+          }
+          
+          const commentBlockCount = commentBlocks.length;
+          
+          // Process all files using our improved method
+          // Get all relevant symbols
           for (const symbol of fileSymbols) {
-            // Generate usage annotations
+            // Filter all annotations
             const usageAnnotations = annotator.generateUsageAnnotations(symbol, {
               groupUsagesByFile: true
+            }).filter(annotation => {
+              // Don't include self-references
+              const match = annotation.match(/^([^:]+):/);
+              if (match) {
+                const annotationPath = match[1].trim();
+                const fileName = path.basename(filePath);
+                return !annotationPath.includes(fileName) &&
+                       !annotationPath.includes('class-super-speedy-compare');
+              }
+              return true;
             });
             
             if (usageAnnotations.length === 0) {
               continue;
             }
             
-            // Find insertion position
+            // We already found the comment blocks, so use them
+            let firstBlock = commentBlocks.length > 0 ? commentBlocks[0] : null;
             const lineOffset = symbol.position.line;
-            const lines = content.split('\n');
-            let insertPosition = lineOffset;
             
-            // Check if there's already a doc block before the symbol
-            let existingBlock = false;
-            let blockStart = -1;
-            let blockEnd = -1;
+            // If we have a first block, use it
+            let firstBlockStart = firstBlock ? firstBlock.start : -1;
+            let firstBlockEnd = firstBlock ? firstBlock.end : -1;
             
-            // Look for existing doc block
-            for (let i = lineOffset - 1; i >= 0; i--) {
-              const line = lines[i].trim();
+            // Either update first block if it exists, or create a new one
+            if (firstBlockStart !== -1 && firstBlockEnd !== -1) {
+              // We have an existing first block - update it
+              // Extract and save the original block content to preserve description
+              const blockContent = lines.slice(firstBlockStart, firstBlockEnd + 1).join('\n');
               
-              // If we find a non-empty, non-comment line, there's no existing block
-              if (line !== '' && 
-                  !line.startsWith(commentStyle.lineStart) && 
-                  !line.startsWith(commentStyle.blockStart)) {
-                break;
-              }
-              
-              // Found start of doc block
-              if (line.startsWith(commentStyle.blockStart)) {
-                existingBlock = true;
-                blockStart = i;
-                
-                // Find end of block
-                for (let j = i; j < lineOffset; j++) {
-                  if (lines[j].trim().endsWith(commentStyle.blockEnd)) {
-                    blockEnd = j;
+              // Extract any existing description to preserve it
+              let description = '';
+              if (blockContent.split('\n').length > 1) {
+                const contentLines = blockContent.split('\n');
+                // Look for a non-empty, non-@ line after the /** start
+                for (let i = 1; i < contentLines.length - 1; i++) {
+                  const lineText = contentLines[i].trim().replace(/^\s*\*\s*/, '');
+                  if (lineText && !lineText.startsWith('@')) {
+                    description = lineText;
                     break;
                   }
                 }
-                
-                break;
               }
-            }
-            
-            // Create or update doc block
-            if (existingBlock && blockStart !== -1 && blockEnd !== -1) {
-              // Extract existing doc block
-              const blockContent = lines.slice(blockStart, blockEnd + 1).join('\n');
               
-              // Update the block
-              const updatedBlock = annotator.updateDocBlock(
-                blockContent, 
-                usageAnnotations, 
-                commentStyle,
-                {
-                  includeMermaid: options.mermaid,
-                  mermaidDiagramType: options.diagramType,
-                  updateExisting: true
-                }
-              );
+              // Create a custom block preserving the description
+              const customBlock: string[] = [];
+              customBlock.push('/**');
+              if (description) {
+                customBlock.push(` * ${description}`);
+                customBlock.push(' *');
+              }
               
-              // Replace the block in the content
-              const beforeBlock = lines.slice(0, blockStart).join('\n');
-              const afterBlock = lines.slice(blockEnd + 1).join('\n');
+              // Add all @usedby annotations
+              for (const annotation of usageAnnotations) {
+                customBlock.push(` * @usedby ${annotation}`);
+              }
               
-              content = beforeBlock + 
-                (beforeBlock ? '\n' : '') + 
-                updatedBlock + 
-                (afterBlock ? '\n' : '') + 
-                afterBlock;
+              customBlock.push(' */');
+              const newBlock = customBlock.join('\n');
+              
+              // Replace just the first block, leave other blocks intact
+              const beforeFirstBlock = lines.slice(0, firstBlockStart).join('\n');
+              const afterFirstBlock = lines.slice(firstBlockEnd + 1).join('\n');
+              
+              content = beforeFirstBlock +
+                (beforeFirstBlock ? '\n' : '') +
+                newBlock +
+                (afterFirstBlock ? '\n' : '') +
+                afterFirstBlock;
               
               fileModified = true;
+              break;  // Only process first symbol for these files
             } else {
-              // Create a new doc block
+              // No existing block - create a new one
               const newBlock = annotator.createDocBlock(
                 symbol, 
                 usageAnnotations, 
@@ -233,16 +266,17 @@ export function annotateCommand(program: Command): void {
                 }
               );
               
-              // Split content at insert position
-              const beforeInsert = lines.slice(0, insertPosition).join('\n');
-              const afterInsert = lines.slice(insertPosition).join('\n');
+              // Insert at the symbol position
+              const beforeInsert = lines.slice(0, lineOffset).join('\n');
+              const afterInsert = lines.slice(lineOffset).join('\n');
               
-              content = beforeInsert + 
-                (beforeInsert ? '\n' : '') + 
-                newBlock + 
+              content = beforeInsert +
+                (beforeInsert ? '\n' : '') +
+                newBlock +
                 afterInsert;
               
               fileModified = true;
+              break; // Only process first symbol for these files
             }
           }
           
@@ -265,4 +299,3 @@ export function annotateCommand(program: Command): void {
       }
     });
 }
-

@@ -158,6 +158,8 @@ export class Annotator {
     
     /**
      * Create a new doc block with @usedby annotations
+     * 
+     * This creates a fresh doc block with annotations when there isn't one already
      */
     createDocBlock(
         symbol: Symbol, 
@@ -227,6 +229,9 @@ export class Annotator {
     
     /**
      * Update an existing doc block with @usedby annotations
+     * 
+     * This carefully merges new @usedby annotations with existing ones,
+     * avoiding duplication and ensuring the comment structure stays clean
      */
     updateDocBlock(
         existingDocBlock: string,
@@ -239,64 +244,73 @@ export class Annotator {
             return existingDocBlock;
         }
         
+        // To avoid duplicate comment blocks, check if this is a @usedby-only block
+        // If it is, we'll likely want to merge it with other blocks or skip it
+        const isUsedByOnlyBlock = existingDocBlock.split('\n')
+            .filter(line => line.trim() &&
+                !line.trim().startsWith(commentStyle.blockStart) &&
+                !line.trim().endsWith(commentStyle.blockEnd))
+            .every(line => line.trim().startsWith('@usedby'));
+        
+        // If this is only @usedby entries, we'll consider these when merging
+        // but don't need to preserve the exact block structure
+        if (isUsedByOnlyBlock) {
+            // Just extract the @usedby entries and let them be merged later
+            const usedByEntries = this.extractUsedByEntries(existingDocBlock);
+            usageAnnotations = [...usageAnnotations, ...usedByEntries];
+            
+            // When it's just a @usedby block, we can create a new clean one
+            const lines: string[] = [];
+            lines.push(commentStyle.blockStart);
+            
+            // Add each unique annotation
+            const uniqueAnnotations = this.deduplicateAnnotations(usageAnnotations);
+            for (const annotation of uniqueAnnotations) {
+                lines.push(`${commentStyle.linePrefix} @usedby ${annotation}`);
+            }
+            
+            lines.push(commentStyle.blockEnd);
+            return lines.join('\n');
+        }
+        
         const lines = existingDocBlock.split('\n');
         const resultLines: string[] = [];
         
         // Track existing @usedby entries to prevent duplicates
-        let existingUsedByEntries: string[] = [];
+        let existingUsedByEntries = this.extractUsedByEntries(existingDocBlock);
         let usedbyTagSection = false;
         let mermaidFound = false;
         let addedNewEntries = false;
         
-        // Find all existing @usedby entries
-        for (const line of lines) {
-            const match = line.trim().match(/@usedby\s+(.*)/);
-            if (match && match[1]) {
-                existingUsedByEntries.push(match[1].trim());
-            }
-        }
+        // Merge all annotations, removing duplicates
+        const allAnnotations = this.deduplicateAnnotations([...usageAnnotations, ...existingUsedByEntries]);
         
         // Process the doc block line by line
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i];
             const trimmedLine = line.trim();
             
-            // Detect @usedby tag section
+            // Skip existing @usedby annotations - we'll add our consolidated list later
             if (trimmedLine.match(/@usedby\s/)) {
                 usedbyTagSection = true;
-                
-                // Add this line, we'll handle duplicates
-                resultLines.push(line);
                 continue;
             }
             
-            // End of @usedby section when we hit another @ tag or blank line after @usedby
-            if (usedbyTagSection &&
-                (trimmedLine.startsWith('@') ||
-                (trimmedLine === '' && lines[i-1].trim().match(/@usedby\s/)))) {
+            // End of @usedby section
+            if (usedbyTagSection && 
+                (trimmedLine.startsWith('@') || trimmedLine === '' || 
+                 trimmedLine.endsWith(commentStyle.blockEnd))) {
+                
                 usedbyTagSection = false;
                 
-                // Add new entries if not already added
+                // Add consolidated @usedby annotations
                 if (!addedNewEntries) {
                     const indentation = line.match(/^\s*/)?.[0] || '';
                     
-                    // Add each new annotation that doesn't already exist
-                    for (const annotation of usageAnnotations) {
-                        // More precise duplicate detection
-                        if (!existingUsedByEntries.some(entry => {
-                            // Extract the file path part from the entry
-                            const entryPathMatch = entry.match(/^([^:]+):/);
-                            const annotationPathMatch = annotation.match(/^([^:]+):/);
-                            
-                            if (entryPathMatch && annotationPathMatch) {
-                                // Compare file paths only, ignoring line numbers
-                                return entryPathMatch[1].trim() === annotationPathMatch[1].trim();
-                            }
-                            return entry.includes(annotation);
-                        })) {
-                            resultLines.push(`${indentation}${commentStyle.linePrefix} @usedby ${annotation}`);
-                            addedNewEntries = true;
-                        }
+                    // Add all unique annotations
+                    for (const annotation of allAnnotations) {
+                        resultLines.push(`${indentation}${commentStyle.linePrefix} @usedby ${annotation}`);
+                        addedNewEntries = true;
                     }
                 }
             }
@@ -321,30 +335,17 @@ export class Annotator {
                 // Add the new @usedby annotations before the closing tag
                 const indentation = line.match(/^\s*/)?.[0] || '';
                 
-                // Add a blank line before the usedby section if there's content
+                // Add a blank line before the usedby section if there's content and no blank line already
                 if (resultLines.length > 1 &&
                     !resultLines[resultLines.length-1].trim().match(/@/) &&
                     !resultLines[resultLines.length-1].trim().match(/^\s*$/)) {
                     resultLines.push(`${indentation}${commentStyle.linePrefix}`);
                 }
                 
-                // Add each new annotation that doesn't already exist
-                for (const annotation of usageAnnotations) {
-                    // More precise duplicate detection
-                    if (!existingUsedByEntries.some(entry => {
-                        // Extract the file path part from the entry
-                        const entryPathMatch = entry.match(/^([^:]+):/);
-                        const annotationPathMatch = annotation.match(/^([^:]+):/);
-                        
-                        if (entryPathMatch && annotationPathMatch) {
-                            // Compare file paths only, ignoring line numbers
-                            return entryPathMatch[1].trim() === annotationPathMatch[1].trim();
-                        }
-                        return entry.includes(annotation);
-                    })) {
-                        resultLines.push(`${indentation}${commentStyle.linePrefix} @usedby ${annotation}`);
-                        addedNewEntries = true;
-                    }
+                // Add all unique annotations
+                for (const annotation of allAnnotations) {
+                    resultLines.push(`${indentation}${commentStyle.linePrefix} @usedby ${annotation}`);
+                    addedNewEntries = true;
                 }
                 
                 // Add Mermaid diagram if requested and not already present
@@ -369,6 +370,272 @@ export class Annotator {
         }
         
         return resultLines.join('\n');
+    }
+    
+    /**
+     * Extract @usedby entries from a doc block
+     */
+    extractUsedByEntries(docBlock: string): string[] {
+        const entries: string[] = [];
+        const lines = docBlock.split('\n');
+        
+        for (const line of lines) {
+            const match = line.trim().match(/@usedby\s+(.*)/);
+            if (match && match[1]) {
+                entries.push(match[1].trim());
+            }
+        }
+        
+        return entries;
+    }
+    
+    /**
+     * Remove duplicate annotations with the same file path
+     */
+    deduplicateAnnotations(annotations: string[]): string[] {
+        const filePathMap = new Map<string, string[]>();
+        
+        // Group by file path
+        for (const annotation of annotations) {
+            const pathMatch = annotation.match(/^([^:]+):/);
+            if (pathMatch) {
+                const filePath = pathMatch[1].trim();
+                if (!filePathMap.has(filePath)) {
+                    filePathMap.set(filePath, [annotation]);
+                } else if (!filePathMap.get(filePath)?.includes(annotation)) {
+                    // Only add if this exact annotation isn't already there
+                    filePathMap.get(filePath)?.push(annotation);
+                }
+            }
+        }
+        
+        // Flatten the map back to an array
+        const result: string[] = [];
+        for (const annotationGroup of filePathMap.values()) {
+            // For each file path, keep only the annotation with the most information
+            if (annotationGroup.length === 1) {
+                result.push(annotationGroup[0]);
+            } else {
+                // Find the annotation with the most line numbers
+                let bestAnnotation = annotationGroup[0];
+                let maxLineCount = this.countLineNumbers(bestAnnotation);
+                
+                for (let i = 1; i < annotationGroup.length; i++) {
+                    const lineCount = this.countLineNumbers(annotationGroup[i]);
+                    if (lineCount > maxLineCount) {
+                        maxLineCount = lineCount;
+                        bestAnnotation = annotationGroup[i];
+                    }
+                }
+                
+                result.push(bestAnnotation);
+            }
+        }
+        
+        return result;
+    }
+    
+    /**
+     * Creates or updates a documentation block for a symbol, handling multiple consecutive blocks properly
+     * This is a newer, more robust method that properly handles the case of multiple consecutive doc blocks
+     * @public
+     */
+    processDocBlocks(
+        content: string,
+        symbol: Symbol,
+        usageAnnotations: string[],
+        commentStyle: CommentStyle,
+        options: AnnotationOptions = {}
+    ): string {
+        const lines = content.split('\n');
+        const lineOffset = symbol.position.line;
+        
+        // Find all doc blocks before the symbol
+        let docBlocks: { start: number, end: number, content: string }[] = [];
+        
+        // Search for doc blocks before the symbol
+        for (let i = lineOffset - 1; i >= 0; i--) {
+            const line = lines[i].trim();
+            
+            // If we find a non-empty, non-comment line, stop searching
+            if (line !== '' &&
+                !line.startsWith(commentStyle.lineStart) &&
+                !line.startsWith(commentStyle.blockStart) &&
+                !line.endsWith(commentStyle.blockEnd)) {
+                break;
+            }
+            
+            // Found start of a doc block
+            if (line.startsWith(commentStyle.blockStart)) {
+                const blockStart = i;
+                
+                // Find end of this block
+                let blockEnd = -1;
+                for (let j = i; j < lineOffset; j++) {
+                    if (lines[j].trim().endsWith(commentStyle.blockEnd)) {
+                        blockEnd = j;
+                        break;
+                    }
+                }
+                
+                if (blockEnd !== -1) {
+                    const blockContent = lines.slice(blockStart, blockEnd + 1).join('\n');
+                    docBlocks.push({
+                        start: blockStart,
+                        end: blockEnd,
+                        content: blockContent
+                    });
+                    
+                    // Skip to before this block to look for more blocks
+                    i = blockStart - 1;
+                }
+            }
+        }
+        
+        // Reverse the blocks to get them in original order
+        docBlocks.reverse();
+        
+        // If there are no existing blocks, create a new one
+        if (docBlocks.length === 0) {
+            const newBlock = this.createDocBlock(symbol, usageAnnotations, commentStyle, options);
+            
+            // Split content at insertion position
+            const beforeInsert = lines.slice(0, lineOffset).join('\n');
+            const afterInsert = lines.slice(lineOffset).join('\n');
+            
+            return beforeInsert +
+                  (beforeInsert ? '\n' : '') +
+                  newBlock +
+                  afterInsert;
+        }
+        
+        // If we have existing blocks, we need to merge them or update them
+        
+        // Collect all @usedby entries from all blocks
+        let allUsedByEntries: string[] = [];
+        for (const block of docBlocks) {
+            const blockEntries = this.extractUsedByEntries(block.content);
+            allUsedByEntries.push(...blockEntries);
+        }
+        
+        // Extract the description from the first block if available
+        let description = '';
+        if (docBlocks.length > 0) {
+            const firstBlockLines = docBlocks[0].content.split('\n');
+            if (firstBlockLines.length > 1) {
+                const firstLine = firstBlockLines[1].trim();
+                if (firstLine && !firstLine.startsWith('@')) {
+                    description = firstLine.replace(new RegExp(`^${commentStyle.linePrefix}\\s*`), '');
+                }
+            }
+        }
+        
+        // Create a new consolidated block
+        const newLines: string[] = [];
+        newLines.push(commentStyle.blockStart);
+        
+        // Add description if we have one
+        if (description) {
+            newLines.push(`${commentStyle.linePrefix} ${description}`);
+            newLines.push(`${commentStyle.linePrefix}`);
+        } else {
+            // Default description based on symbol type
+            newLines.push(`${commentStyle.linePrefix} ${symbol.name} ${symbol.type}`);
+            newLines.push(`${commentStyle.linePrefix}`);
+        }
+        
+        // Combine and deduplicate annotations
+        const combinedAnnotations = [...usageAnnotations, ...allUsedByEntries];
+        const uniqueAnnotations = this.deduplicateAnnotations(combinedAnnotations);
+        
+        // Add all unique annotations
+        for (const annotation of uniqueAnnotations) {
+            newLines.push(`${commentStyle.linePrefix} @usedby ${annotation}`);
+        }
+        
+        // Add Mermaid diagram if requested
+        if (options.includeMermaid && symbol.usages && symbol.usages.length > 0) {
+            newLines.push(`${commentStyle.linePrefix}`);
+            newLines.push(`${commentStyle.linePrefix} Usage diagram:`);
+            newLines.push(`${commentStyle.linePrefix} \`\`\`mermaid`);
+            
+            const diagramType = options.mermaidDiagramType || 'flowchart';
+            if (diagramType === 'flowchart') {
+                this.appendFlowchartDiagram(newLines, symbol, commentStyle);
+            } else {
+                this.appendGraphDiagram(newLines, symbol, commentStyle);
+            }
+            
+            newLines.push(`${commentStyle.linePrefix} \`\`\``);
+        }
+        
+        newLines.push(commentStyle.blockEnd);
+        const consolidatedBlock = newLines.join('\n');
+        
+        // Replace all blocks with the consolidated one
+        if (docBlocks.length > 0) {
+            const firstBlockStart = docBlocks[0].start;
+            const lastBlockEnd = docBlocks[docBlocks.length - 1].end;
+            
+            const beforeAllBlocks = lines.slice(0, firstBlockStart).join('\n');
+            const afterAllBlocks = lines.slice(lastBlockEnd + 1).join('\n');
+            
+            return beforeAllBlocks +
+                   (beforeAllBlocks ? '\n' : '') +
+                   consolidatedBlock +
+                   (afterAllBlocks ? '\n' : '') +
+                   afterAllBlocks;
+        }
+        
+        return content;
+    }
+    
+    /**
+     * Count the number of line numbers in an annotation
+     */
+    private countLineNumbers(annotation: string): number {
+        const match = annotation.match(/^[^:]+:(.+)\s+\(/);
+        if (match && match[1]) {
+            return match[1].split(',').length;
+        }
+        return 0;
+    }
+    
+    /**
+     * Determine if two annotations are equivalent (they refer to the same file and location)
+     */
+    private areAnnotationsEquivalent(annotation1: string, annotation2: string): boolean {
+        // Extract file path and line number info
+        const regex = /^([^:]+):(\d+(?:,\s*\d+)*)/;
+        const match1 = annotation1.match(regex);
+        const match2 = annotation2.match(regex);
+        
+        if (!match1 || !match2) {
+            return false;
+        }
+        
+        // Compare file paths
+        if (match1[1].trim() !== match2[1].trim()) {
+            return false;
+        }
+        
+        // Parse line numbers
+        const lines1 = match1[2].split(',').map(s => parseInt(s.trim(), 10)).sort();
+        const lines2 = match2[2].split(',').map(s => parseInt(s.trim(), 10)).sort();
+        
+        // If they have different number of lines, they're not equivalent
+        if (lines1.length !== lines2.length) {
+            return false;
+        }
+        
+        // Compare each line number
+        for (let i = 0; i < lines1.length; i++) {
+            if (lines1[i] !== lines2[i]) {
+                return false;
+            }
+        }
+        
+        return true;
     }
     
     /**
