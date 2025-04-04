@@ -4,7 +4,8 @@ import * as path from 'path';
 import chalk from 'chalk';
 import ora from 'ora';
 import * as inquirer from 'inquirer';
-import { Annotator, Scanner, Symbol } from 'codetracer-core';
+import * as glob from 'glob';
+import { Annotator, Scanner, Symbol, LanguageParser } from 'codetracer-core';
 import { createParsers } from '../parsers';
 
 interface AnnotateOptions {
@@ -12,7 +13,7 @@ interface AnnotateOptions {
   include?: string[];
   exclude?: string[];
   mermaid?: boolean;
-  force?: boolean;
+  confirm?: boolean;
   verbose?: boolean;
   diagramType?: 'flowchart' | 'graph';
 }
@@ -28,7 +29,7 @@ export function annotateCommand(program: Command): void {
     .option('--mermaid', 'include Mermaid diagrams in annotations', false)
     .option('--diagram-type <type>', 'type of Mermaid diagram (flowchart or graph)', 'flowchart')
     .option('-v, --verbose', 'display detailed information about the process')
-    .option('-f, --force', 'force update without confirmation', false)
+    .option('--confirm', 'ask for confirmation before updating files', false)
     .action(async (targetPath: string, options: AnnotateOptions) => {
       try {
         // Commander doesn't always correctly set the verbose flag from -v
@@ -95,22 +96,115 @@ export function annotateCommand(program: Command): void {
         } else {
           console.log(chalk.yellow('No input file specified. Performing a new scan...'));
           
+          const startTime = Date.now();
+          
           // Create a scanner and parsers
           const scanner = new Scanner();
           const parsers = createParsers();
           
           // Register parsers
           for (const [ext, parser] of Object.entries(parsers)) {
-            scanner.registerParser(ext, parser);
+            scanner.registerParser(ext, parser as LanguageParser);
           }
           
+          // Generate a temp scan results file in the target directory
+          const dirname = path.dirname(resolvedPath);
+          const basename = path.basename(resolvedPath);
+          const tempScanFile = path.join(dirname, `.${basename}.usedby.json`);
+          
           const spinner = ora('Scanning files...').start();
-          // TODO: Implement quick scan here similar to scan command
-          spinner.succeed('Scan completed');
-          // For now, we're just showing a message since we haven't implemented the scan here
-          console.log(chalk.yellow('Full scan implementation skipped for this demo.'));
-          console.log(chalk.yellow('Please use the scan command first and specify the --input option.'));
-          process.exit(0);
+          
+          try {
+            // Process similar to scan command
+            const includePatterns = options.include || ['**/*.php', '**/*.js', '**/*.css'];
+            const excludePatterns = options.exclude || ['node_modules/**', 'vendor/**', 'dist/**', 'build/**'];
+            
+            // Create glob pattern for finding files
+            const fileGlobs = includePatterns.map(pattern =>
+              path.join(resolvedPath, pattern.startsWith('**') ? pattern : `**/${pattern}`)
+            );
+            
+            let filePaths: string[] = [];
+            
+            for (const fileGlob of fileGlobs) {
+              const files = glob.sync(fileGlob, {
+                ignore: excludePatterns,
+                absolute: true
+              });
+              filePaths = [...filePaths, ...files];
+            }
+            
+            // Remove duplicates
+            filePaths = [...new Set(filePaths)];
+            
+            // Batch files for processing
+            const batchSize = 50;
+            const batches = [];
+            for (let i = 0; i < filePaths.length; i += batchSize) {
+              batches.push(filePaths.slice(i, i + batchSize));
+            }
+            
+            // Process batches
+            let totalSymbols = 0;
+            let totalUsages = 0;
+            let batchNumber = 0;
+            
+            for (const batch of batches) {
+              batchNumber++;
+              spinner.text = `Processing batch ${batchNumber}/${batches.length} (${batch.length} files)...`;
+              
+              // Read files and process
+              const files = await Promise.all(
+                batch.map(async (filePath) => {
+                  try {
+                    const content = fs.readFileSync(filePath, 'utf8');
+                    return { path: filePath, content };
+                  } catch (err) {
+                    console.error(`Error reading file ${filePath}:`, err);
+                    return null;
+                  }
+                })
+              );
+              
+              // Filter out nulls
+              const validFiles = files.filter(Boolean) as { path: string; content: string }[];
+              
+              // Process batch with deep scanning for better usage detection
+              const result = await scanner.processBatch(validFiles, {
+                includePatterns,
+                excludePatterns,
+                scanDepth: 'deep', // Use deep scanning for better results
+                cacheResults: true
+              });
+              
+              totalSymbols += result.symbolsFound;
+              totalUsages += result.usagesFound;
+            }
+            
+            // Save scan results to temp file
+            const result = {
+              symbols: Array.from(scanner['symbolCache'].values()) as Symbol[],
+              scanTime: Date.now() - startTime,
+              filesScanned: filePaths.length,
+              symbolsFound: totalSymbols,
+              usagesFound: totalUsages
+            };
+            
+            fs.writeFileSync(tempScanFile, JSON.stringify(result, null, 2));
+            spinner.succeed(`Scan completed (${filePaths.length} files, ${totalSymbols} symbols, ${totalUsages} usages)`);
+            
+            if (options.verbose) {
+              console.log(chalk.dim(`Saved scan results to ${tempScanFile}`));
+            }
+            
+            // Update symbols with scan results
+            symbols = result.symbols;
+            
+          } catch (error) {
+            spinner.fail('Scan failed');
+            console.error(chalk.red('Error during scan:'), error);
+            process.exit(1);
+          }
         }
         
         // Check if we have symbols to process
@@ -119,13 +213,13 @@ export function annotateCommand(program: Command): void {
           process.exit(0);
         }
         
-        // Confirm annotation unless --force is used
-        if (!options.force) {
+        // Confirm annotation if --confirm is used
+        if (options.confirm) {
           const answer = await inquirer.prompt([{
             type: 'confirm',
             name: 'proceed',
             message: `Update @usedby annotations in source files (${symbols.length} symbols found)?`,
-            default: false
+            default: true
           }]);
           
           if (!answer.proceed) {
