@@ -139,7 +139,9 @@ export function annotateCommand(program: Command): void {
         const spinner = ora('Updating annotations...').start();
         
         let updatedFiles = 0;
+        let skippedFiles = 0;
         const updatedFilePaths: string[] = []; // Track updated file paths for verbose mode
+        const skippedFilePaths: string[] = []; // Track skipped file paths for verbose mode
         
         // Group symbols by file for more efficient processing
         const symbolsByFile = new Map<string, Symbol[]>();
@@ -318,30 +320,67 @@ export function annotateCommand(program: Command): void {
           // Save modified file
           if (fileModified) {
             try {
-              fs.writeFileSync(filePath, content);
-              updatedFiles++;
-              updatedFilePaths.push(filePath); // Track updated file paths for verbose mode
+              // Get original file content to compare if it actually changed
+              const originalContent = fs.readFileSync(filePath, 'utf8');
               
-              if (options.verbose) {
-                spinner.text = `Updated ${updatedFiles} files with @usedby annotations...`;
-                console.log(chalk.dim(`  + Updated file: ${filePath}`));
+              if (originalContent !== content) {
+                // File was actually modified
+                fs.writeFileSync(filePath, content);
+                updatedFiles++;
+                updatedFilePaths.push(filePath); // Track updated file paths for verbose mode
+                
+                if (options.verbose) {
+                  spinner.text = `Updated ${updatedFiles} files with @usedby annotations...`;
+                  console.log(chalk.dim(`  + Updated: ${filePath}`));
+                }
+              } else {
+                // File already had correct annotations - no changes needed
+                skippedFiles++;
+                skippedFilePaths.push(filePath); // Track skipped file paths for verbose mode
+                
+                if (options.verbose) {
+                  console.log(chalk.dim(`  ○ Skipped: ${filePath} (already has annotations)`));
+                }
               }
             } catch (err) {
-              console.error(`Error writing file ${filePath}:`, err);
+              console.error(`Error processing file ${filePath}:`, err);
             }
           }
         }
         
-        spinner.succeed(`Updated ${updatedFiles} files with @usedby annotations`);
+        // Prepare success message based on what happened
+        let successMessage = '';
+        if (updatedFiles > 0 && skippedFiles > 0) {
+          successMessage = `Updated ${updatedFiles} files and skipped ${skippedFiles} files (already annotated)`;
+        } else if (updatedFiles > 0) {
+          successMessage = `Updated ${updatedFiles} files with @usedby annotations`;
+        } else if (skippedFiles > 0) {
+          successMessage = `No changes needed. Skipped ${skippedFiles} files (already annotated)`;
+        } else {
+          successMessage = 'No files were updated or skipped';
+        }
         
-        // Display updated files in verbose mode
-        if (options.verbose && updatedFilePaths.length > 0) {
-          console.log(chalk.cyan('\nUpdated files:'));
-          console.log(chalk.dim('-------------------'));
-          updatedFilePaths.forEach((filePath, index) => {
-            console.log(`  ${index + 1}. ${filePath}`);
-          });
-          console.log(chalk.dim('-------------------')); // Separator for readability
+        spinner.succeed(successMessage);
+        
+        // Display updated and skipped files in verbose mode
+        if (options.verbose) {
+          if (updatedFilePaths.length > 0) {
+            console.log(chalk.cyan('\nUpdated files:'));
+            console.log(chalk.dim('-------------------'));
+            updatedFilePaths.forEach((filePath, index) => {
+              console.log(`  ${index + 1}. ${filePath}`);
+            });
+            console.log(chalk.dim('-------------------'));
+          }
+          
+          if (skippedFilePaths.length > 0) {
+            console.log(chalk.cyan('\nSkipped files (already annotated):'));
+            console.log(chalk.dim('-------------------'));
+            skippedFilePaths.forEach((filePath, index) => {
+              console.log(`  ${index + 1}. ${filePath}`);
+            });
+            console.log(chalk.dim('-------------------'));
+          }
         }
         
       } catch (error) {

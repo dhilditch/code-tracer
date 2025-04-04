@@ -2,7 +2,6 @@
 /**
  * Test file 1 with multiple comment blocks to check if merging works
  *
- * @usedby test-reference.php:3, 6, 11, 13 (reference)
  */
 /**
  * Second comment block

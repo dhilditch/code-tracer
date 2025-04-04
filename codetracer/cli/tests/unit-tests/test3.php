@@ -3,7 +3,6 @@
 /**
  * TestClass3 class
  *
- * @usedby test-reference.php:15 (reference)
  */
 class TestClass3 {
     public function doAnotherThing() {
