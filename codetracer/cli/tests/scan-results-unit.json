@@ -1,0 +1,424 @@
+{
+    "symbols": [
+      {
+        "id": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php#useTestClasses#11:0",
+        "name": "useTestClasses",
+        "type": "function",
+        "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+        "position": {
+          "line": 11,
+          "character": 0
+        },
+        "range": {
+          "start": {
+            "line": 11,
+            "character": 0
+          },
+          "end": {
+            "line": 11,
+            "character": 26
+          }
+        },
+        "usages": []
+      },
+      {
+        "id": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test.php#TestClass#10:0",
+        "name": "TestClass",
+        "type": "class",
+        "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test.php",
+        "position": {
+          "line": 10,
+          "character": 0
+        },
+        "range": {
+          "start": {
+            "line": 10,
+            "character": 0
+          },
+          "end": {
+            "line": 10,
+            "character": 16
+          }
+        },
+        "documentation": "/**\n * Third block\n */",
+        "usages": [
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+            "position": {
+              "line": 2,
+              "character": 24
+            },
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 24
+              },
+              "end": {
+                "line": 2,
+                "character": 33
+              }
+            },
+            "context": "* This file references TestClass to create valid usages",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+            "position": {
+              "line": 5,
+              "character": 17
+            },
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 17
+              },
+              "end": {
+                "line": 5,
+                "character": 26
+              }
+            },
+            "context": "// Importing the TestClass files",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+            "position": {
+              "line": 10,
+              "character": 13
+            },
+            "range": {
+              "start": {
+                "line": 10,
+                "character": 13
+              },
+              "end": {
+                "line": 10,
+                "character": 22
+              }
+            },
+            "context": "// Using the TestClass instances",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+            "position": {
+              "line": 12,
+              "character": 17
+            },
+            "range": {
+              "start": {
+                "line": 12,
+                "character": 17
+              },
+              "end": {
+                "line": 12,
+                "character": 26
+              }
+            },
+            "context": "$test1 = new TestClass();",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test1.php",
+            "position": {
+              "line": 10,
+              "character": 6
+            },
+            "range": {
+              "start": {
+                "line": 10,
+                "character": 6
+              },
+              "end": {
+                "line": 10,
+                "character": 15
+              }
+            },
+            "context": "class TestClass {",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test1.php",
+            "position": {
+              "line": 12,
+              "character": 16
+            },
+            "range": {
+              "start": {
+                "line": 12,
+                "character": 16
+              },
+              "end": {
+                "line": 12,
+                "character": 25
+              }
+            },
+            "context": "return 'TestClass is working';",
+            "type": "reference"
+          }
+        ]
+      },
+      {
+        "id": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test1.php#TestClass#10:0",
+        "name": "TestClass",
+        "type": "class",
+        "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test1.php",
+        "position": {
+          "line": 10,
+          "character": 0
+        },
+        "range": {
+          "start": {
+            "line": 10,
+            "character": 0
+          },
+          "end": {
+            "line": 10,
+            "character": 16
+          }
+        },
+        "documentation": "/**\n * Third comment block \n */",
+        "usages": [
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+            "position": {
+              "line": 2,
+              "character": 24
+            },
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 24
+              },
+              "end": {
+                "line": 2,
+                "character": 33
+              }
+            },
+            "context": "* This file references TestClass to create valid usages",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+            "position": {
+              "line": 5,
+              "character": 17
+            },
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 17
+              },
+              "end": {
+                "line": 5,
+                "character": 26
+              }
+            },
+            "context": "// Importing the TestClass files",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+            "position": {
+              "line": 10,
+              "character": 13
+            },
+            "range": {
+              "start": {
+                "line": 10,
+                "character": 13
+              },
+              "end": {
+                "line": 10,
+                "character": 22
+              }
+            },
+            "context": "// Using the TestClass instances",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+            "position": {
+              "line": 12,
+              "character": 17
+            },
+            "range": {
+              "start": {
+                "line": 12,
+                "character": 17
+              },
+              "end": {
+                "line": 12,
+                "character": 26
+              }
+            },
+            "context": "$test1 = new TestClass();",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test.php",
+            "position": {
+              "line": 10,
+              "character": 6
+            },
+            "range": {
+              "start": {
+                "line": 10,
+                "character": 6
+              },
+              "end": {
+                "line": 10,
+                "character": 15
+              }
+            },
+            "context": "class TestClass {",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test1.php",
+            "position": {
+              "line": 12,
+              "character": 16
+            },
+            "range": {
+              "start": {
+                "line": 12,
+                "character": 16
+              },
+              "end": {
+                "line": 12,
+                "character": 25
+              }
+            },
+            "context": "return 'TestClass is working';",
+            "type": "reference"
+          }
+        ]
+      },
+      {
+        "id": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test2.php#TestClass2#4:0",
+        "name": "TestClass2",
+        "type": "class",
+        "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test2.php",
+        "position": {
+          "line": 4,
+          "character": 0
+        },
+        "range": {
+          "start": {
+            "line": 4,
+            "character": 0
+          },
+          "end": {
+            "line": 4,
+            "character": 17
+          }
+        },
+        "documentation": "/**\n * Test file 2 with a single comment block - @usedby should go here\n */",
+        "usages": [
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+            "position": {
+              "line": 13,
+              "character": 17
+            },
+            "range": {
+              "start": {
+                "line": 13,
+                "character": 17
+              },
+              "end": {
+                "line": 13,
+                "character": 27
+              }
+            },
+            "context": "$test2 = new TestClass2();",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test2.php",
+            "position": {
+              "line": 6,
+              "character": 16
+            },
+            "range": {
+              "start": {
+                "line": 6,
+                "character": 16
+              },
+              "end": {
+                "line": 6,
+                "character": 26
+              }
+            },
+            "context": "return 'TestClass2 is also working';",
+            "type": "reference"
+          }
+        ]
+      },
+      {
+        "id": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test3.php#TestClass3#2:0",
+        "name": "TestClass3",
+        "type": "class",
+        "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test3.php",
+        "position": {
+          "line": 2,
+          "character": 0
+        },
+        "range": {
+          "start": {
+            "line": 2,
+            "character": 0
+          },
+          "end": {
+            "line": 2,
+            "character": 17
+          }
+        },
+        "usages": [
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test-reference.php",
+            "position": {
+              "line": 14,
+              "character": 17
+            },
+            "range": {
+              "start": {
+                "line": 14,
+                "character": 17
+              },
+              "end": {
+                "line": 14,
+                "character": 27
+              }
+            },
+            "context": "$test3 = new TestClass3();",
+            "type": "reference"
+          },
+          {
+            "filePath": "/var/www/code-tracer/codetracer/cli/tests/unit-tests/test3.php",
+            "position": {
+              "line": 4,
+              "character": 16
+            },
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 16
+              },
+              "end": {
+                "line": 4,
+                "character": 26
+              }
+            },
+            "context": "return 'TestClass3 has no comment block initially';",
+            "type": "reference"
+          }
+        ]
+      }
+    ],
+    "scanTime": 23,
+    "filesScanned": 5,
+    "symbolsFound": 5,
+    "usagesFound": 16
+  }
