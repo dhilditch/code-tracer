@@ -13,6 +13,7 @@ interface AnnotateOptions {
   exclude?: string[];
   mermaid?: boolean;
   force?: boolean;
+  verbose?: boolean;
   diagramType?: 'flowchart' | 'graph';
 }
 
@@ -26,9 +27,17 @@ export function annotateCommand(program: Command): void {
     .option('--exclude <patterns...>', 'file patterns to exclude', ['node_modules/**', 'vendor/**', 'dist/**', 'build/**'])
     .option('--mermaid', 'include Mermaid diagrams in annotations', false)
     .option('--diagram-type <type>', 'type of Mermaid diagram (flowchart or graph)', 'flowchart')
+    .option('-v, --verbose', 'display detailed information about the process')
     .option('-f, --force', 'force update without confirmation', false)
     .action(async (targetPath: string, options: AnnotateOptions) => {
       try {
+        // Commander doesn't always correctly set the verbose flag from -v
+        // We detect it manually from command line args to ensure it works
+        const hasVerboseArg = process.argv.includes('--verbose') || process.argv.includes('-v');
+        if (hasVerboseArg && !options.verbose) {
+          options.verbose = true;
+        }
+        
         // Resolve target path
         const resolvedPath = path.resolve(process.cwd(), targetPath);
         
@@ -54,6 +63,31 @@ export function annotateCommand(program: Command): void {
             const data = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
             symbols = data.symbols || [];
             spinner.succeed(`Loaded ${symbols.length} symbols from ${inputPath}`);
+            
+            // Display loaded symbols in verbose mode
+            if (options.verbose) {
+              console.log(chalk.cyan('\nSymbols loaded:'));
+              console.log(chalk.dim('-------------------'));
+              
+              // Group symbols by file for a cleaner display
+              const symbolsByFile = new Map<string, Symbol[]>();
+              for (const symbol of symbols) {
+                if (!symbolsByFile.has(symbol.filePath)) {
+                  symbolsByFile.set(symbol.filePath, []);
+                }
+                symbolsByFile.get(symbol.filePath)?.push(symbol);
+              }
+              
+              // Display symbols grouped by file
+              for (const [filePath, fileSymbols] of symbolsByFile.entries()) {
+                console.log(chalk.yellow(`\n  File: ${filePath}`));
+                for (const symbol of fileSymbols) {
+                  console.log(`    - ${symbol.name} (${symbol.type})`);
+                }
+              }
+              
+              console.log(chalk.dim('-------------------'));
+            }
           } catch (err) {
             spinner.fail(`Failed to parse input file: ${err}`);
             process.exit(1);
@@ -105,6 +139,7 @@ export function annotateCommand(program: Command): void {
         const spinner = ora('Updating annotations...').start();
         
         let updatedFiles = 0;
+        const updatedFilePaths: string[] = []; // Track updated file paths for verbose mode
         
         // Group symbols by file for more efficient processing
         const symbolsByFile = new Map<string, Symbol[]>();
@@ -285,6 +320,12 @@ export function annotateCommand(program: Command): void {
             try {
               fs.writeFileSync(filePath, content);
               updatedFiles++;
+              updatedFilePaths.push(filePath); // Track updated file paths for verbose mode
+              
+              if (options.verbose) {
+                spinner.text = `Updated ${updatedFiles} files with @usedby annotations...`;
+                console.log(chalk.dim(`  + Updated file: ${filePath}`));
+              }
             } catch (err) {
               console.error(`Error writing file ${filePath}:`, err);
             }
@@ -292,6 +333,16 @@ export function annotateCommand(program: Command): void {
         }
         
         spinner.succeed(`Updated ${updatedFiles} files with @usedby annotations`);
+        
+        // Display updated files in verbose mode
+        if (options.verbose && updatedFilePaths.length > 0) {
+          console.log(chalk.cyan('\nUpdated files:'));
+          console.log(chalk.dim('-------------------'));
+          updatedFilePaths.forEach((filePath, index) => {
+            console.log(`  ${index + 1}. ${filePath}`);
+          });
+          console.log(chalk.dim('-------------------')); // Separator for readability
+        }
         
       } catch (error) {
         console.error(chalk.red('Error during annotation:'), error);

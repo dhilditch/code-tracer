@@ -24,16 +24,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 32,
+            "line": 34,
             "character": 21
           },
           "range": {
             "start": {
-              "line": 32,
+              "line": 34,
               "character": 21
             },
             "end": {
-              "line": 32,
+              "line": 34,
               "character": 47
             }
           },
@@ -65,16 +65,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 38,
+            "line": 40,
             "character": 59
           },
           "range": {
             "start": {
-              "line": 38,
+              "line": 40,
               "character": 59
             },
             "end": {
-              "line": 38,
+              "line": 40,
               "character": 73
             }
           },
@@ -84,16 +84,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 38,
+            "line": 40,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 38,
+              "line": 40,
               "character": 8
             },
             "end": {
-              "line": 38,
+              "line": 40,
               "character": 75
             }
           },
@@ -144,16 +144,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 39,
+            "line": 41,
             "character": 59
           },
           "range": {
             "start": {
-              "line": 39,
+              "line": 41,
               "character": 59
             },
             "end": {
-              "line": 39,
+              "line": 41,
               "character": 74
             }
           },
@@ -163,16 +163,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 39,
+            "line": 41,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 39,
+              "line": 41,
               "character": 8
             },
             "end": {
-              "line": 39,
+              "line": 41,
               "character": 76
             }
           },
@@ -245,16 +245,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 35,
+            "line": 37,
             "character": 48
           },
           "range": {
             "start": {
-              "line": 35,
+              "line": 37,
               "character": 48
             },
             "end": {
-              "line": 35,
+              "line": 37,
               "character": 62
             }
           },
@@ -264,16 +264,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 35,
+            "line": 37,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 35,
+              "line": 37,
               "character": 8
             },
             "end": {
-              "line": 35,
+              "line": 37,
               "character": 64
             }
           },
@@ -485,16 +485,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 42,
+            "line": 44,
             "character": 64
           },
           "range": {
             "start": {
-              "line": 42,
+              "line": 44,
               "character": 64
             },
             "end": {
-              "line": 42,
+              "line": 44,
               "character": 78
             }
           },
@@ -504,16 +504,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 42,
+            "line": 44,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 42,
+              "line": 44,
               "character": 8
             },
             "end": {
-              "line": 42,
+              "line": 44,
               "character": 80
             }
           },
@@ -583,16 +583,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 46,
+            "line": 48,
             "character": 66
           },
           "range": {
             "start": {
-              "line": 46,
+              "line": 48,
               "character": 66
             },
             "end": {
-              "line": 46,
+              "line": 48,
               "character": 82
             }
           },
@@ -602,16 +602,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 46,
+            "line": 48,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 46,
+              "line": 48,
               "character": 8
             },
             "end": {
-              "line": 46,
+              "line": 48,
               "character": 84
             }
           },
@@ -719,16 +719,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 43,
+            "line": 45,
             "character": 65
           },
           "range": {
             "start": {
-              "line": 43,
+              "line": 45,
               "character": 65
             },
             "end": {
-              "line": 43,
+              "line": 45,
               "character": 80
             }
           },
@@ -738,16 +738,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 43,
+            "line": 45,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 43,
+              "line": 45,
               "character": 8
             },
             "end": {
-              "line": 43,
+              "line": 45,
               "character": 82
             }
           },
@@ -817,16 +817,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 47,
+            "line": 49,
             "character": 67
           },
           "range": {
             "start": {
-              "line": 47,
+              "line": 49,
               "character": 67
             },
             "end": {
-              "line": 47,
+              "line": 49,
               "character": 84
             }
           },
@@ -836,16 +836,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 47,
+            "line": 49,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 47,
+              "line": 49,
               "character": 8
             },
             "end": {
-              "line": 47,
+              "line": 49,
               "character": 86
             }
           },
@@ -953,16 +953,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 44,
+            "line": 46,
             "character": 62
           },
           "range": {
             "start": {
-              "line": 44,
+              "line": 46,
               "character": 62
             },
             "end": {
-              "line": 44,
+              "line": 46,
               "character": 74
             }
           },
@@ -972,16 +972,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 44,
+            "line": 46,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 44,
+              "line": 46,
               "character": 8
             },
             "end": {
-              "line": 44,
+              "line": 46,
               "character": 76
             }
           },
@@ -1051,16 +1051,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 48,
+            "line": 50,
             "character": 64
           },
           "range": {
             "start": {
-              "line": 48,
+              "line": 50,
               "character": 64
             },
             "end": {
-              "line": 48,
+              "line": 50,
               "character": 78
             }
           },
@@ -1070,16 +1070,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 48,
+            "line": 50,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 48,
+              "line": 50,
               "character": 8
             },
             "end": {
-              "line": 48,
+              "line": 50,
               "character": 80
             }
           },
@@ -1187,16 +1187,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 45,
+            "line": 47,
             "character": 69
           },
           "range": {
             "start": {
-              "line": 45,
+              "line": 47,
               "character": 69
             },
             "end": {
-              "line": 45,
+              "line": 47,
               "character": 88
             }
           },
@@ -1206,16 +1206,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 45,
+            "line": 47,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 45,
+              "line": 47,
               "character": 8
             },
             "end": {
-              "line": 45,
+              "line": 47,
               "character": 90
             }
           },
@@ -1247,16 +1247,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 49,
+            "line": 51,
             "character": 65
           },
           "range": {
             "start": {
-              "line": 49,
+              "line": 51,
               "character": 65
             },
             "end": {
-              "line": 49,
+              "line": 51,
               "character": 80
             }
           },
@@ -1266,16 +1266,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 49,
+            "line": 51,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 49,
+              "line": 51,
               "character": 8
             },
             "end": {
-              "line": 49,
+              "line": 51,
               "character": 82
             }
           },
@@ -1402,16 +1402,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 50,
+            "line": 52,
             "character": 62
           },
           "range": {
             "start": {
-              "line": 50,
+              "line": 52,
               "character": 62
             },
             "end": {
-              "line": 50,
+              "line": 52,
               "character": 74
             }
           },
@@ -1421,16 +1421,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 50,
+            "line": 52,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 50,
+              "line": 52,
               "character": 8
             },
             "end": {
-              "line": 50,
+              "line": 52,
               "character": 76
             }
           },
@@ -1576,16 +1576,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 51,
+            "line": 53,
             "character": 65
           },
           "range": {
             "start": {
-              "line": 51,
+              "line": 53,
               "character": 65
             },
             "end": {
-              "line": 51,
+              "line": 53,
               "character": 80
             }
           },
@@ -1595,16 +1595,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 51,
+            "line": 53,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 51,
+              "line": 53,
               "character": 8
             },
             "end": {
-              "line": 51,
+              "line": 53,
               "character": 82
             }
           },
@@ -1614,25 +1614,25 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-activator.php#Super_Speedy_Compare_Activator#4:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-activator.php#Super_Speedy_Compare_Activator#6:0",
       "name": "Super_Speedy_Compare_Activator",
       "type": "class",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-activator.php",
       "position": {
-        "line": 4,
+        "line": 6,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 4,
+          "line": 6,
           "character": 0
         },
         "end": {
-          "line": 4,
+          "line": 6,
           "character": 37
         }
       },
-      "documentation": "/**\n * Fired during plugin activation\n */",
+      "documentation": "/**\n * Fired during plugin activation\n *\n * @usedby ../super-speedy-compare.php:43 (reference)\n */",
       "usages": [
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/super-speedy-compare.php",
@@ -1656,21 +1656,21 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-activator.php#create_tables#17:19",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-activator.php#create_tables#19:19",
       "name": "create_tables",
       "type": "function",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-activator.php",
       "position": {
-        "line": 17,
+        "line": 19,
         "character": 19
       },
       "range": {
         "start": {
-          "line": 17,
+          "line": 19,
           "character": 19
         },
         "end": {
-          "line": 17,
+          "line": 19,
           "character": 44
         }
       },
@@ -1678,16 +1678,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-activator.php",
           "position": {
-            "line": 11,
+            "line": 13,
             "character": 14
           },
           "range": {
             "start": {
-              "line": 11,
+              "line": 13,
               "character": 14
             },
             "end": {
-              "line": 11,
+              "line": 13,
               "character": 27
             }
           },
@@ -2413,16 +2413,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 42,
+            "line": 44,
             "character": 64
           },
           "range": {
             "start": {
-              "line": 42,
+              "line": 44,
               "character": 64
             },
             "end": {
-              "line": 42,
+              "line": 44,
               "character": 78
             }
           },
@@ -2432,16 +2432,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 42,
+            "line": 44,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 42,
+              "line": 44,
               "character": 8
             },
             "end": {
-              "line": 42,
+              "line": 44,
               "character": 80
             }
           },
@@ -2511,16 +2511,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 46,
+            "line": 48,
             "character": 66
           },
           "range": {
             "start": {
-              "line": 46,
+              "line": 48,
               "character": 66
             },
             "end": {
-              "line": 46,
+              "line": 48,
               "character": 82
             }
           },
@@ -2530,16 +2530,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 46,
+            "line": 48,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 46,
+              "line": 48,
               "character": 8
             },
             "end": {
-              "line": 46,
+              "line": 48,
               "character": 84
             }
           },
@@ -2685,16 +2685,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 51,
+            "line": 53,
             "character": 65
           },
           "range": {
             "start": {
-              "line": 51,
+              "line": 53,
               "character": 65
             },
             "end": {
-              "line": 51,
+              "line": 53,
               "character": 80
             }
           },
@@ -2704,16 +2704,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 51,
+            "line": 53,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 51,
+              "line": 53,
               "character": 8
             },
             "end": {
-              "line": 51,
+              "line": 53,
               "character": 82
             }
           },
@@ -2881,16 +2881,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 43,
+            "line": 45,
             "character": 65
           },
           "range": {
             "start": {
-              "line": 43,
+              "line": 45,
               "character": 65
             },
             "end": {
-              "line": 43,
+              "line": 45,
               "character": 80
             }
           },
@@ -2900,16 +2900,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 43,
+            "line": 45,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 43,
+              "line": 45,
               "character": 8
             },
             "end": {
-              "line": 43,
+              "line": 45,
               "character": 82
             }
           },
@@ -2979,16 +2979,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 47,
+            "line": 49,
             "character": 67
           },
           "range": {
             "start": {
-              "line": 47,
+              "line": 49,
               "character": 67
             },
             "end": {
-              "line": 47,
+              "line": 49,
               "character": 84
             }
           },
@@ -2998,16 +2998,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 47,
+            "line": 49,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 47,
+              "line": 49,
               "character": 8
             },
             "end": {
-              "line": 47,
+              "line": 49,
               "character": 86
             }
           },
@@ -3175,16 +3175,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 50,
+            "line": 52,
             "character": 62
           },
           "range": {
             "start": {
-              "line": 50,
+              "line": 52,
               "character": 62
             },
             "end": {
-              "line": 50,
+              "line": 52,
               "character": 74
             }
           },
@@ -3194,16 +3194,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 50,
+            "line": 52,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 50,
+              "line": 52,
               "character": 8
             },
             "end": {
-              "line": 50,
+              "line": 52,
               "character": 76
             }
           },
@@ -3352,16 +3352,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 44,
+            "line": 46,
             "character": 62
           },
           "range": {
             "start": {
-              "line": 44,
+              "line": 46,
               "character": 62
             },
             "end": {
-              "line": 44,
+              "line": 46,
               "character": 74
             }
           },
@@ -3371,16 +3371,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 44,
+            "line": 46,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 44,
+              "line": 46,
               "character": 8
             },
             "end": {
-              "line": 44,
+              "line": 46,
               "character": 76
             }
           },
@@ -3450,16 +3450,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 48,
+            "line": 50,
             "character": 64
           },
           "range": {
             "start": {
-              "line": 48,
+              "line": 50,
               "character": 64
             },
             "end": {
-              "line": 48,
+              "line": 50,
               "character": 78
             }
           },
@@ -3469,16 +3469,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 48,
+            "line": 50,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 48,
+              "line": 50,
               "character": 8
             },
             "end": {
-              "line": 48,
+              "line": 50,
               "character": 80
             }
           },
@@ -3747,16 +3747,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 45,
+            "line": 47,
             "character": 69
           },
           "range": {
             "start": {
-              "line": 45,
+              "line": 47,
               "character": 69
             },
             "end": {
-              "line": 45,
+              "line": 47,
               "character": 88
             }
           },
@@ -3766,16 +3766,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 45,
+            "line": 47,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 45,
+              "line": 47,
               "character": 8
             },
             "end": {
-              "line": 45,
+              "line": 47,
               "character": 90
             }
           },
@@ -3965,25 +3965,25 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-deactivator.php#Super_Speedy_Compare_Deactivator#4:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-deactivator.php#Super_Speedy_Compare_Deactivator#6:0",
       "name": "Super_Speedy_Compare_Deactivator",
       "type": "class",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-deactivator.php",
       "position": {
-        "line": 4,
+        "line": 6,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 4,
+          "line": 6,
           "character": 0
         },
         "end": {
-          "line": 4,
+          "line": 6,
           "character": 39
         }
       },
-      "documentation": "/**\n * Fired during plugin deactivation\n */",
+      "documentation": "/**\n * Fired during plugin deactivation\n *\n * @usedby ../super-speedy-compare.php:51 (reference)\n */",
       "usages": [
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/super-speedy-compare.php",
@@ -4007,46 +4007,46 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-deactivator.php#only#9:12",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-deactivator.php#only#11:12",
       "name": "only",
       "type": "class",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-deactivator.php",
       "position": {
-        "line": 9,
+        "line": 11,
         "character": 12
       },
       "range": {
         "start": {
-          "line": 9,
+          "line": 11,
           "character": 12
         },
         "end": {
-          "line": 13,
+          "line": 15,
           "character": 40
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php#Super_Speedy_Compare#4:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php#Super_Speedy_Compare#6:0",
       "name": "Super_Speedy_Compare",
       "type": "class",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
       "position": {
-        "line": 4,
+        "line": 6,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 4,
+          "line": 6,
           "character": 0
         },
         "end": {
-          "line": 4,
+          "line": 6,
           "character": 27
         }
       },
-      "documentation": "/**\n * The main plugin class\n */",
+      "documentation": "/**\n * The main plugin class\n *\n * @usedby ../super-speedy-compare.php:25, 42, 50 (reference)\n */",
       "usages": [
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/super-speedy-compare.php",
@@ -4070,21 +4070,21 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php#require_once#21:17",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php#require_once#23:17",
       "name": "require_once",
       "type": "class",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
       "position": {
-        "line": 21,
+        "line": 23,
         "character": 17
       },
       "range": {
         "start": {
-          "line": 21,
+          "line": 23,
           "character": 17
         },
         "end": {
-          "line": 31,
+          "line": 33,
           "character": 42
         }
       },
@@ -4092,16 +4092,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-activator.php",
           "position": {
-            "line": 95,
+            "line": 97,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 95,
+              "line": 97,
               "character": 8
             },
             "end": {
-              "line": 95,
+              "line": 97,
               "character": 20
             }
           },
@@ -4111,16 +4111,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 22,
+            "line": 24,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 22,
+              "line": 24,
               "character": 8
             },
             "end": {
-              "line": 22,
+              "line": 24,
               "character": 20
             }
           },
@@ -4130,16 +4130,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 25,
+            "line": 27,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 25,
+              "line": 27,
               "character": 8
             },
             "end": {
-              "line": 25,
+              "line": 27,
               "character": 20
             }
           },
@@ -4206,21 +4206,21 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php#require_once#24:14",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php#require_once#26:14",
       "name": "require_once",
       "type": "class",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
       "position": {
-        "line": 24,
+        "line": 26,
         "character": 14
       },
       "range": {
         "start": {
-          "line": 24,
+          "line": 26,
           "character": 14
         },
         "end": {
-          "line": 31,
+          "line": 33,
           "character": 42
         }
       },
@@ -4228,16 +4228,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-activator.php",
           "position": {
-            "line": 95,
+            "line": 97,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 95,
+              "line": 97,
               "character": 8
             },
             "end": {
-              "line": 95,
+              "line": 97,
               "character": 20
             }
           },
@@ -4247,16 +4247,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 22,
+            "line": 24,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 22,
+              "line": 24,
               "character": 8
             },
             "end": {
-              "line": 22,
+              "line": 24,
               "character": 20
             }
           },
@@ -4266,16 +4266,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 25,
+            "line": 27,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 25,
+              "line": 27,
               "character": 8
             },
             "end": {
-              "line": 25,
+              "line": 27,
               "character": 20
             }
           },
@@ -4342,21 +4342,21 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php#load_dependencies#20:12",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php#load_dependencies#22:12",
       "name": "load_dependencies",
       "type": "function",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
       "position": {
-        "line": 20,
+        "line": 22,
         "character": 12
       },
       "range": {
         "start": {
-          "line": 20,
+          "line": 22,
           "character": 12
         },
         "end": {
-          "line": 20,
+          "line": 22,
           "character": 41
         }
       },
@@ -4364,16 +4364,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 11,
+            "line": 13,
             "character": 15
           },
           "range": {
             "start": {
-              "line": 11,
+              "line": 13,
               "character": 15
             },
             "end": {
-              "line": 11,
+              "line": 13,
               "character": 32
             }
           },
@@ -4383,21 +4383,21 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php#define_admin_hooks#31:12",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php#define_admin_hooks#33:12",
       "name": "define_admin_hooks",
       "type": "function",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
       "position": {
-        "line": 31,
+        "line": 33,
         "character": 12
       },
       "range": {
         "start": {
-          "line": 31,
+          "line": 33,
           "character": 12
         },
         "end": {
-          "line": 31,
+          "line": 33,
           "character": 42
         }
       },
@@ -4405,16 +4405,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 14,
+            "line": 16,
             "character": 15
           },
           "range": {
             "start": {
-              "line": 14,
+              "line": 16,
               "character": 15
             },
             "end": {
-              "line": 14,
+              "line": 16,
               "character": 33
             }
           },
@@ -4446,16 +4446,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare-activator.php",
           "position": {
-            "line": 95,
+            "line": 97,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 95,
+              "line": 97,
               "character": 8
             },
             "end": {
-              "line": 95,
+              "line": 97,
               "character": 20
             }
           },
@@ -4465,16 +4465,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 22,
+            "line": 24,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 22,
+              "line": 24,
               "character": 8
             },
             "end": {
-              "line": 22,
+              "line": 24,
               "character": 20
             }
           },
@@ -4484,16 +4484,16 @@
         {
           "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/includes/class-super-speedy-compare.php",
           "position": {
-            "line": 25,
+            "line": 27,
             "character": 8
           },
           "range": {
             "start": {
-              "line": 25,
+              "line": 27,
               "character": 8
             },
             "end": {
-              "line": 25,
+              "line": 27,
               "character": 20
             }
           },
@@ -4867,21 +4867,21 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-admin-page#5:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-admin-page#8:0",
       "name": ".ssc-admin-page",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 5,
+        "line": 8,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 5,
+          "line": 8,
           "character": 0
         },
         "end": {
-          "line": 5,
+          "line": 8,
           "character": 15
         }
       },
@@ -4965,105 +4965,105 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-admin-header#9:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-admin-header#12:0",
       "name": ".ssc-admin-header",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 9,
+        "line": 12,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 9,
+          "line": 12,
           "character": 0
         },
         "end": {
-          "line": 9,
+          "line": 12,
           "character": 17
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-card#24:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-card#27:0",
       "name": ".ssc-card",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 24,
+        "line": 27,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 24,
+          "line": 27,
           "character": 0
         },
         "end": {
-          "line": 24,
+          "line": 27,
           "character": 9
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-form#40:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-form#43:0",
       "name": ".ssc-form",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 40,
+        "line": 43,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 40,
+          "line": 43,
           "character": 0
         },
         "end": {
-          "line": 40,
+          "line": 43,
           "character": 9
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-form-row#44:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-form-row#47:0",
       "name": ".ssc-form-row",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 44,
+        "line": 47,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 44,
+          "line": 47,
           "character": 0
         },
         "end": {
-          "line": 44,
+          "line": 47,
           "character": 13
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.description#66:14",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.description#69:14",
       "name": ".description",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 66,
+        "line": 69,
         "character": 14
       },
       "range": {
         "start": {
-          "line": 66,
+          "line": 69,
           "character": 14
         },
         "end": {
-          "line": 66,
+          "line": 69,
           "character": 26
         }
       },
@@ -5337,21 +5337,21 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-table#74:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-table#77:0",
       "name": ".ssc-table",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 74,
+        "line": 77,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 74,
+          "line": 77,
           "character": 0
         },
         "end": {
-          "line": 74,
+          "line": 77,
           "character": 10
         }
       },
@@ -5435,42 +5435,42 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-actions#96:11",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-actions#99:11",
       "name": ".ssc-actions",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 96,
+        "line": 99,
         "character": 11
       },
       "range": {
         "start": {
-          "line": 96,
+          "line": 99,
           "character": 11
         },
         "end": {
-          "line": 96,
+          "line": 99,
           "character": 23
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.button#101:24",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.button#104:24",
       "name": ".button",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 101,
+        "line": 104,
         "character": 24
       },
       "range": {
         "start": {
-          "line": 101,
+          "line": 104,
           "character": 24
         },
         "end": {
-          "line": 101,
+          "line": 104,
           "character": 31
         }
       },
@@ -6200,294 +6200,294 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-media-preview#106:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-media-preview#109:0",
       "name": ".ssc-media-preview",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 106,
+        "line": 109,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 106,
+          "line": 109,
           "character": 0
         },
         "end": {
-          "line": 106,
+          "line": 109,
           "character": 18
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-plugins-list#124:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-plugins-list#127:0",
       "name": ".ssc-plugins-list",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 124,
+        "line": 127,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 124,
+          "line": 127,
           "character": 0
         },
         "end": {
-          "line": 124,
+          "line": 127,
           "character": 17
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-plugin-card#131:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-plugin-card#134:0",
       "name": ".ssc-plugin-card",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 131,
+        "line": 134,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 131,
+          "line": 134,
           "character": 0
         },
         "end": {
-          "line": 131,
+          "line": 134,
           "character": 16
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-plugin-image#146:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-plugin-image#149:0",
       "name": ".ssc-plugin-image",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 146,
+        "line": 149,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 146,
+          "line": 149,
           "character": 0
         },
         "end": {
-          "line": 146,
+          "line": 149,
           "character": 17
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-plugin-details#163:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-plugin-details#166:0",
       "name": ".ssc-plugin-details",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 163,
+        "line": 166,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 163,
+          "line": 166,
           "character": 0
         },
         "end": {
-          "line": 163,
+          "line": 166,
           "character": 19
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-plugin-actions#172:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-plugin-actions#175:0",
       "name": ".ssc-plugin-actions",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 172,
+        "line": 175,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 172,
+          "line": 175,
           "character": 0
         },
         "end": {
-          "line": 172,
+          "line": 175,
           "character": 19
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-features-grid#179:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-features-grid#182:0",
       "name": ".ssc-features-grid",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 179,
+        "line": 182,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 179,
+          "line": 182,
           "character": 0
         },
         "end": {
-          "line": 179,
+          "line": 182,
           "character": 18
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-features-grid#187:4",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-features-grid#190:4",
       "name": ".ssc-features-grid",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 187,
+        "line": 190,
         "character": 4
       },
       "range": {
         "start": {
-          "line": 187,
+          "line": 190,
           "character": 4
         },
         "end": {
-          "line": 187,
+          "line": 190,
           "character": 22
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-features-grid#193:4",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-features-grid#196:4",
       "name": ".ssc-features-grid",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 193,
+        "line": 196,
         "character": 4
       },
       "range": {
         "start": {
-          "line": 193,
+          "line": 196,
           "character": 4
         },
         "end": {
-          "line": 193,
+          "line": 196,
           "character": 22
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-feature-card#198:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-feature-card#201:0",
       "name": ".ssc-feature-card",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 198,
+        "line": 201,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 198,
+          "line": 201,
           "character": 0
         },
         "end": {
-          "line": 198,
+          "line": 201,
           "character": 17
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-feature-description#213:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-feature-description#216:0",
       "name": ".ssc-feature-description",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 213,
+        "line": 216,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 213,
+          "line": 216,
           "character": 0
         },
         "end": {
-          "line": 213,
+          "line": 216,
           "character": 24
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-feature-values#218:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-feature-values#221:0",
       "name": ".ssc-feature-values",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 218,
+        "line": 221,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 218,
+          "line": 221,
           "character": 0
         },
         "end": {
-          "line": 218,
+          "line": 221,
           "character": 19
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-feature-value-item#227:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-feature-value-item#230:0",
       "name": ".ssc-feature-value-item",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 227,
+        "line": 230,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 227,
+          "line": 230,
           "character": 0
         },
         "end": {
-          "line": 227,
+          "line": 230,
           "character": 23
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.name#233:24",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.name#236:24",
       "name": ".name",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 233,
+        "line": 236,
         "character": 24
       },
       "range": {
         "start": {
-          "line": 233,
+          "line": 236,
           "character": 24
         },
         "end": {
-          "line": 233,
+          "line": 236,
           "character": 29
         }
       },
@@ -6989,21 +6989,21 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.value#239:24",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.value#242:24",
       "name": ".value",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 239,
+        "line": 242,
         "character": 24
       },
       "range": {
         "start": {
-          "line": 239,
+          "line": 242,
           "character": 24
         },
         "end": {
-          "line": 239,
+          "line": 242,
           "character": 30
         }
       },
@@ -7942,42 +7942,42 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-message#244:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.ssc-message#247:0",
       "name": ".ssc-message",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 244,
+        "line": 247,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 244,
+          "line": 247,
           "character": 0
         },
         "end": {
-          "line": 244,
+          "line": 247,
           "character": 12
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.success#251:12",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.success#254:12",
       "name": ".success",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 251,
+        "line": 254,
         "character": 12
       },
       "range": {
         "start": {
-          "line": 251,
+          "line": 254,
           "character": 12
         },
         "end": {
-          "line": 251,
+          "line": 254,
           "character": 20
         }
       },
@@ -8156,21 +8156,21 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.error#256:12",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.error#259:12",
       "name": ".error",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 256,
+        "line": 259,
         "character": 12
       },
       "range": {
         "start": {
-          "line": 256,
+          "line": 259,
           "character": 12
         },
         "end": {
-          "line": 256,
+          "line": 259,
           "character": 18
         }
       },
@@ -8634,21 +8634,21 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.warning#261:12",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.warning#264:12",
       "name": ".warning",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 261,
+        "line": 264,
         "character": 12
       },
       "range": {
         "start": {
-          "line": 261,
+          "line": 264,
           "character": 12
         },
         "end": {
-          "line": 261,
+          "line": 264,
           "character": 20
         }
       },
@@ -8713,91 +8713,91 @@
       ]
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.feature-value-boolean-true#267:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.feature-value-boolean-true#270:0",
       "name": ".feature-value-boolean-true",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 267,
+        "line": 270,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 267,
+          "line": 270,
           "character": 0
         },
         "end": {
-          "line": 267,
+          "line": 270,
           "character": 27
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.feature-value-boolean-false#271:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.feature-value-boolean-false#274:0",
       "name": ".feature-value-boolean-false",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 271,
+        "line": 274,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 271,
+          "line": 274,
           "character": 0
         },
         "end": {
-          "line": 271,
+          "line": 274,
           "character": 28
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.feature-value-number#275:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.feature-value-number#278:0",
       "name": ".feature-value-number",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 275,
+        "line": 278,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 275,
+          "line": 278,
           "character": 0
         },
         "end": {
-          "line": 275,
+          "line": 278,
           "character": 21
         }
       },
       "usages": []
     },
     {
-      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.missing-feature#280:0",
+      "id": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css#.missing-feature#283:0",
       "name": ".missing-feature",
       "type": "selector",
       "filePath": "/var/www/code-tracer/codetracer/cli/tests/live-test/admin/css/super-speedy-compare-admin.css",
       "position": {
-        "line": 280,
+        "line": 283,
         "character": 0
       },
       "range": {
         "start": {
-          "line": 280,
+          "line": 283,
           "character": 0
         },
         "end": {
-          "line": 280,
+          "line": 283,
           "character": 16
         }
       },
       "usages": []
     }
   ],
-  "scanTime": 57,
+  "scanTime": 55,
   "filesScanned": 16,
   "symbolsFound": 88,
   "usagesFound": 362
