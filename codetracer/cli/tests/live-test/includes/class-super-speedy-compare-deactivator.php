@@ -2,6 +2,7 @@
 /**
  * Fired during plugin deactivation
  *
+ * @usedby ../super-speedy-compare.php:51 (reference)
  */
 class Super_Speedy_Compare_Deactivator {
 

@@ -4,7 +4,7 @@
 export interface Symbol {
     id: string;
     name: string;
-    type: 'class' | 'function' | 'method' | 'selector' | 'variable' | 'event';
+    type: 'class' | 'function' | 'method' | 'selector' | 'variable' | 'event' | 'file';
     filePath: string;
     position: {
         line: number;
@@ -42,7 +42,7 @@ export interface Usage {
         };
     };
     context: string;
-    type: 'call' | 'reference' | 'extend' | 'implement' | 'import';
+    type: 'call' | 'reference' | 'extend' | 'implement' | 'import' | 'inclusion';
 }
 
 export interface ParserOptions {
